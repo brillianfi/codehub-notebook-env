@@ -1,0 +1,6 @@
+name: codehub-notebook-env
+dependencies:
+  - python=3.10.13
+  - pip
+  - pip:
+      - -r dev_requirements.txt

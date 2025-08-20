@@ -1,0 +1,18 @@
+version: 1
+
+disable_existing_loggers: false
+
+formatters:
+  standard:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+handlers:
+  console:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: standard
+    filename: /home/jovyan/logs/log.txt
+
+root:
+  level: DEBUG
+  handlers: [console]

@@ -1,0 +1,16 @@
+FROM jupyter/minimal-notebook:8d32a5208ca1
+
+ARG NB_UID="1000"
+ARG NB_USER="jovyan"
+
+USER $NB_UID
+
+COPY jupyter-requirements.txt .
+RUN pip install --no-cache-dir -r jupyter-requirements.txt
+
+COPY dev_requirements.txt .
+RUN pip install --no-cache-dir -r dev_requirements.txt
+
+COPY .pylintrc .
+
+CMD pylint --rcfile=.pylintrc cds/cds
