@@ -4,6 +4,11 @@ ARG NB_UID="1000"
 ARG NB_USER="jovyan"
 ARG py_ver=3.11
 
+# What version of kernel-requirements.txt to use for the build.
+ARG KERNEL_REQ
+# Fail fast if KERNEL_REQ is empty
+RUN test -n "$KERNEL_REQ" || (echo "ERROR: KERNEL_REQ build argument is required" && exit 1)
+
 ENV ENV_NAME=python311
 
 ENV CUDA_VISIBLE_DEVICES=-1
@@ -32,7 +37,7 @@ RUN mamba create --yes -p "${CONDA_DIR}/envs/${ENV_NAME}" \
     'jupyterlab' && \
     mamba clean --all -f -y
 
-COPY kernel-requirements.txt .
+COPY ${KERNEL_REQ} ./kernel-requirements.txt
 RUN "${CONDA_DIR}/envs/${ENV_NAME}/bin/pip" install --no-cache-dir \
     -r kernel-requirements.txt
 
