@@ -249,9 +249,10 @@ gcloud auth configure-docker europe-north2-docker.pkg.dev
 3. Build and push the Docker image with correct tag to the Docker registry at
    `europe-north2-docker.pkg.dev/<project_id>/codehub/jupyter-env`
    ```
-   docker build --no-cache --platform=linux/amd64 -t codehub/jupyter-env:<tag_name> .
+   docker build --no-cache --platform=linux/amd64 --build-arg KERNEL_REQ=<kernel-requirements-file> -t codehub/jupyter-env:<tag_name> .
    gcloud builds submit --region=europe-north2 --tag europe-north2-docker.pkg.dev/<project_id>/codehub/jupyter-env:<tag_name>
    ```
+   where <kernel-requirements-file> is the path to requirements file for the Jupyter kernel.
    Note that the default tag for codehub deployments is `stable`.
 
 ## Development
