@@ -68,6 +68,11 @@ def cli(ctx):
         'nbgrader.preprocessors.OverwriteCells',
         'nbgrader.preprocessors.CheckCellMetadata'
     ]
+
+    # Increase default timeout to avoid timeout when grading exercises with slow
+    # cells. Adjust this number as needed.
+    config.ExecutePreprocessor.timeout = 300
+
     # Need to add both custom config here and in student_nbgrader_config.py
     config.ClearSolutions.code_stub = {
         "python": "### START ANSWER HERE ###\n### END ANSWER HERE ###"
