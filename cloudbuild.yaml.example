@@ -1,0 +1,16 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "--no-cache"
+      - "--platform=linux/amd64"
+      - "--build-arg"
+      - "KERNEL_REQ=${_KERNEL_REQ}"
+      - "-t"
+      - "${_IMAGE}"
+      - "."
+images:
+  - "${_IMAGE}"
+substitutions:
+  _KERNEL_REQ: "<kernel-req-file>"
+  _IMAGE: "<region>-docker.pkg.dev/<project_id>/codehub/jupyter-env:<tag>"

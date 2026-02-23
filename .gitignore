@@ -11,3 +11,4 @@ __pycache__
 .secret
 
 .python-version
+cloudbuild.yaml
